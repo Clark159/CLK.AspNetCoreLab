@@ -1,0 +1,170 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <script>
+
+        // getToken
+        function getToken(userId, userName) {
+
+            // Variables
+
+            // ActionModel
+            var actionModel = {};
+            actionModel.userId = userId;
+            actionModel.userName = userName;
+
+            // Post
+            postRequst("token/getToken", actionModel)
+
+                // Success
+                .then(function (response) {
+                    document.getElementById("getToken.result").innerText = JSON.stringify(response, null, 2);
+                })
+
+                // Error
+                .catch(function (error) {
+                    document.getElementById("getToken.result").innerText = JSON.stringify(error, null, 2);
+                });
+        }
+
+        // getUser001
+        function getUser001() {
+
+            // Variables
+            var token = null;
+            if (document.getElementById("getToken.result").innerText != "") {
+                token = JSON.parse(document.getElementById("getToken.result").innerText).token;
+            }
+
+            // ActionModel
+            var actionModel = {};
+
+            // Headers
+            var headers = {};
+            if (token != null) headers["Authorization"] = "Bearer " + token;
+            
+            // Post
+            postRequst("home/getUser001", actionModel, headers)
+
+                // Success
+                .then(function (response) {
+                    document.getElementById("getUser001.result").innerText = JSON.stringify(response, null, 2);
+                })
+
+                // Error
+                .catch(function (error) {
+                    document.getElementById("getUser001.result").innerText = JSON.stringify(error, null, 2);
+                });
+        }
+
+        // getUser002
+        function getUser002() {
+
+            // Variables
+            var token = null;
+            if (document.getElementById("getToken.result").innerText != "") {
+                token = JSON.parse(document.getElementById("getToken.result").innerText).token;
+            }
+
+            // ActionModel
+            var actionModel = {};
+
+            // Headers
+            var headers = {};
+            if (token != null) headers["Authorization"] = "Bearer " + token;
+
+            // Post
+            postRequst("home/getUser002", actionModel, headers)
+
+                // Success
+                .then(function (response) {
+                    document.getElementById("getUser002.result").innerText = JSON.stringify(response, null, 2);
+                })
+
+                // Error
+                .catch(function (error) {
+                    document.getElementById("getUser002.result").innerText = JSON.stringify(error, null, 2);
+                });
+        }
+
+        // PostRequst
+        function postRequst(url, body, headers) {
+
+            // Headers
+            if (headers == null) headers = {};
+            if (headers["Content-Type"] == null) headers["Content-Type"] = "application/json";
+            if (headers["Accept"] == null) headers["Accept"] = "application/json";
+
+            // Post
+            var task = fetch(url, {
+                method: "POST",
+                headers: headers,
+                body: JSON.stringify(body)
+            })
+
+            // Response
+            .then(function (response) {
+                return response.text().then(function (text) {
+
+                    // Success
+                    if (response.ok == true) {
+                        return text ? JSON.parse(text) : {};
+                    }
+
+                    // Error
+                    if (response.ok == false) {
+                        var error = text ? JSON.parse(text) : {};
+                        error.status = response.status;
+                        throw error
+                    }
+                })
+            })
+
+            // Error
+            .catch(function (error) {
+
+                // Local
+                if (error instanceof TypeError == true) {
+                    throw {
+                        errorCode: 999,
+                        message: "Connection Failed"
+                    }
+                };
+
+                // Remote
+                throw error;
+            });
+
+            // Return
+            return task;
+        }
+
+    </script>
+</head>
+<body>
+
+    <!--Title-->
+    <h2>PermissionLab.Index</h2>
+    <hr />
+
+    <!--GetToken-->
+    <button onclick="getToken('0001', 'Clark');">GetToken:Clark</button>
+    <button onclick="getToken('0002', 'Jane');">GetToken:Jane</button><br />
+    <br />
+    <div id="getToken.result"></div><hr />
+
+    <!--GetUser001-->
+    <button onclick="getUser001();">GetUser001</button><br />
+    <br />
+    <div id="getUser001.result"></div><hr />
+
+    <!--GetUser002-->
+    <button onclick="getUser002();">GetUser002</button><br />
+    <br />
+    <div id="getUser002.result"></div><hr />
+
+</body>
+</html>
