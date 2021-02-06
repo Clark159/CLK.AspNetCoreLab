@@ -12,4 +12,8 @@
     <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="5.0.2" />
   </ItemGroup>
 
+  <Target Name="PreBuild" BeforeTargets="PreBuildEvent">
+    <Exec Command="start xcopy &quot;$(SolutionDir)TemplateLab\wwwroot\*&quot; &quot;$(ProjectDir)wwwroot&quot; /r /s /i /y" />
+  </Target>
+
 </Project>

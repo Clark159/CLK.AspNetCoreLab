@@ -1,0 +1,73 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <script src="clk.lab.js"></script>
+    <script>
+
+        // getIndex01
+        function getIndex01() {
+
+            // Variables
+
+            // ActionModel
+            var actionModel = {};
+
+            // Post
+            postRequst("api/home/index01", actionModel)
+
+                // Success
+                .then(function (response) {
+                    document.getElementById("getIndex01.result").innerText = JSON.stringify(response, null, 2);
+                })
+
+                // Error
+                .catch(function (error) {
+                    document.getElementById("getIndex01.result").innerText = JSON.stringify(error, null, 2);
+                });
+        }
+
+        // getIndex02
+        function getIndex02() {
+
+            // Variables
+
+            // ActionModel
+            var actionModel = {};
+
+            // Post
+            postRequst("api/test/home/index02", actionModel)
+
+                // Success
+                .then(function (response) {
+                    document.getElementById("getIndex02.result").innerText = JSON.stringify(response, null, 2);
+                })
+
+                // Error
+                .catch(function (error) {
+                    document.getElementById("getIndex02.result").innerText = JSON.stringify(error, null, 2);
+                });
+        }
+
+    </script>
+</head>
+<body>
+
+    <!--Title-->
+    <h2>GlobalRouteAttributeLab.Index</h2>
+    <hr />
+
+    <!--GetIndex01-->
+    <button onclick="getIndex01();">api/home/index01</button><br />
+    <br />
+    <div id="getIndex01.result"></div><hr />
+
+    <!--GetIndex02-->
+    <button onclick="getIndex02();">api/test/home/index02</button><br />
+    <br />
+    <div id="getIndex02.result"></div><hr />
+
+</body>
+</html>

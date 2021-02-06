@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace JwtAuthLab
 {
-    public partial class TokenController : ControllerBase
+    public partial class TokenController : Controller
     {
         // Fields
         private readonly JwtHelper _jwtHelper;
@@ -23,11 +23,11 @@ namespace JwtAuthLab
     }
 
     // GetToken
-    public partial class TokenController : ControllerBase
+    public partial class TokenController : Controller
     {
         // Methods
         [AllowAnonymous]
-        public GetTokenResultModel GetToken([FromBody] GetTokenActionModel actionModel)
+        public ActionResult<GetTokenResultModel> GetToken([FromBody] GetTokenActionModel actionModel)
         {
             #region Contracts
 
@@ -61,11 +61,11 @@ namespace JwtAuthLab
 
 
     // GetUser
-    public partial class TokenController : ControllerBase
+    public partial class TokenController : Controller
     {
         // Methods
         //[Authorize]
-        public GetUserResultModel GetUser([FromBody] GetUserActionModel actionModel)
+        public ActionResult<GetUserResultModel> GetUser([FromBody] GetUserActionModel actionModel)
         {
             #region Contracts
 

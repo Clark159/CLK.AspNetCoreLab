@@ -1,0 +1,143 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <script src="clk.lab.js"></script>
+    <script>
+
+        // getUserJson
+        function getUserJson() {
+
+            // Variables
+
+            // ActionModel
+            var actionModel = {};
+
+            // Headers
+            var headers = {};
+            headers["Accept"] = "application/json";
+
+            // Post
+            postRequst("home/getUser", actionModel, headers)
+
+                // Success
+                .then(function (response) {
+                    document.getElementById("getUserJson.result").innerText = JSON.stringify(response, null, 2);
+                })
+
+                // Error
+                .catch(function (error) {
+                    document.getElementById("getUserJson.result").innerText = JSON.stringify(error, null, 2);
+                });
+        }
+
+        // getUserXml
+        function getUserXml() {
+
+            // Variables
+
+            // ActionModel
+            var actionModel = {};
+
+            // Headers
+            var headers = {};
+            headers["Accept"] = "application/xml";
+
+            // Post
+            postRequst("home/getUser", actionModel, headers)
+
+                // Success
+                .then(function (response) {
+                    document.getElementById("getUserXml.result").innerText = JSON.stringify(response, null, 2);
+                })
+
+                // Error
+                .catch(function (error) {
+                    document.getElementById("getUserXml.result").innerText = JSON.stringify(error, null, 2);
+                });
+        }
+
+        // getNullJson
+        function getNullJson() {
+
+            // Variables
+
+            // ActionModel
+            var actionModel = {};
+
+            // Headers
+            var headers = {};
+            headers["Accept"] = "application/json";
+
+            // Post
+            postRequst("home/getNull", actionModel, headers)
+
+                // Success
+                .then(function (response) {
+                    document.getElementById("getNullJson.result").innerText = JSON.stringify(response, null, 2);
+                })
+
+                // Error
+                .catch(function (error) {
+                    document.getElementById("getNullJson.result").innerText = JSON.stringify(error, null, 2);
+                });
+        }
+
+        // getNullXml
+        function getNullXml() {
+
+            // Variables
+
+            // ActionModel
+            var actionModel = {};
+
+            // Headers
+            var headers = {};
+            headers["Accept"] = "application/xml";
+
+            // Post
+            postRequst("home/getNull", actionModel, headers)
+
+                // Success
+                .then(function (response) {
+                    document.getElementById("getNullXml.result").innerText = JSON.stringify(response, null, 2);
+                })
+
+                // Error
+                .catch(function (error) {
+                    document.getElementById("getNullXml.result").innerText = JSON.stringify(error, null, 2);
+                });
+        }
+
+    </script>
+</head>
+<body>
+
+    <!--Title-->
+    <h2>ApiOutputLab.Index</h2>
+    <hr />
+
+    <!--GetUserJson-->
+    <button onclick="getUserJson();">GetUserJson</button><br />
+    <br />
+    <div id="getUserJson.result"></div><hr />
+
+    <!--GetUserXml-->
+    <button onclick="getUserXml();">GetUserXml</button><br />
+    <br />
+    <div id="getUserXml.result"></div><hr />
+
+    <!--GetNullJson-->
+    <button onclick="getNullJson();">GetNullJson</button><br />
+    <br />
+    <div id="getNullJson.result"></div><hr />
+
+    <!--GetNullXml-->
+    <button onclick="getNullXml();">GetNullXml</button><br />
+    <br />
+    <div id="getNullXml.result"></div><hr />
+
+</body>
+</html>

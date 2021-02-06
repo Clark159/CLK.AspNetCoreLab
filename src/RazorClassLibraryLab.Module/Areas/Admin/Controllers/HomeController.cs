@@ -10,7 +10,7 @@ namespace RazorClassLibraryLab.Module.Admin
     public class HomeController : Controller
     {
         // Methods
-        public IActionResult Index()
+        public ActionResult Index()
         {
             return View();
         }

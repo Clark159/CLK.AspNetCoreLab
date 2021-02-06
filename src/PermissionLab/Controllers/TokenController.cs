@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace PermissionLab
 {
-    public partial class TokenController : ControllerBase
+    public partial class TokenController : Controller
     {
         // Fields
         private readonly JwtHelper _jwtHelper;
@@ -23,11 +23,11 @@ namespace PermissionLab
     }
 
     // GetToken
-    public partial class TokenController : ControllerBase
+    public partial class TokenController : Controller
     {
         // Methods
         [AllowAnonymous]
-        public GetTokenResultModel GetToken([FromBody] GetTokenActionModel actionModel)
+        public ActionResult<GetTokenResultModel> GetToken([FromBody] GetTokenActionModel actionModel)
         {
             #region Contracts
 

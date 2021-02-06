@@ -1,7 +1,6 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc.Razor;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using System;
@@ -22,30 +21,8 @@ namespace AreaLab
 
             #endregion
 
-            // Services
+            // Mvc
             services.AddMvc();
-
-            // RazorViewEngine
-            services.Configure<RazorViewEngineOptions>(options =>
-            {
-                // ViewLocationFormats
-                Console.WriteLine();
-                Console.WriteLine("=======================");
-                Console.WriteLine("ViewLocationFormats");
-                foreach (var viewLocationFormat in options.ViewLocationFormats)
-                {
-                    Console.WriteLine(viewLocationFormat);
-                }
-
-                // AreaViewLocationFormats
-                Console.WriteLine();
-                Console.WriteLine("=======================");
-                Console.WriteLine("AreaViewLocationFormats");
-                foreach (var viewLocationFormat in options.AreaViewLocationFormats)
-                {
-                    Console.WriteLine(viewLocationFormat);
-                }
-            });
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)

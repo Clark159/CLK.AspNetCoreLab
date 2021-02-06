@@ -1,6 +1,8 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc.Razor;
+using Microsoft.AspNetCore.Mvc.Versioning;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using System;
@@ -8,7 +10,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace EmptyLab
+namespace IntegrationLab
 {
     public class Startup
     {
@@ -21,6 +23,19 @@ namespace EmptyLab
 
             #endregion
 
+            // Mvc
+            services.AddMvc();
+
+            // RazorViewEngine
+            services.Configure<RazorViewEngineOptions>(options =>
+            {
+                // ViewLocationFormats
+                {
+                    // Area
+                    options.AreaViewLocationFormats.Add("/Views/{2}/{1}/{0}.cshtml");
+                    options.AreaViewLocationFormats.Add("/Views/{2}/Shared/{0}.cshtml");
+                }
+            });
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -38,6 +53,9 @@ namespace EmptyLab
                 app.UseDeveloperExceptionPage();
             }
 
+            // StaticFile
+            app.UseStaticFiles();
+
             // Routing
             app.UseRouting();
             {
@@ -47,11 +65,19 @@ namespace EmptyLab
             // Endpoints
             app.UseEndpoints(endpoints =>
             {
-                // Hello World
-                endpoints.MapGet("/", async context =>
-                {
-                    await context.Response.WriteAsync("Hello World!");
-                });
+                // Default
+                endpoints.MapControllerRoute
+                (
+                    name: "Default",
+                    pattern: "{controller=Home}/{action=Index}"
+                );
+
+                // Area
+                endpoints.MapControllerRoute
+                (
+                    name: "Area",
+                    pattern: "{area:exists}/{controller=Home}/{action=Index}"
+                );
             });
         }
     }

@@ -1,0 +1,111 @@
+﻿<!DOCTYPE html>
+
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <script src="clk.lab.js"></script>
+    <script>
+
+        // getDataV1
+        function getDataV1() {
+
+            // Variables
+
+            // ActionModel
+            var actionModel = {};
+
+            // Headers
+            var headers = {};
+            headers["api-version"] = "1.0";
+
+            // Post
+            postRequst("home/getData", actionModel, headers)
+
+                // Success
+                .then(function (response) {
+                    document.getElementById("getDataV1.result").innerText = JSON.stringify(response, null, 2);
+                })
+
+                // Error
+                .catch(function (error) {
+                    document.getElementById("getDataV1.result").innerText = JSON.stringify(error, null, 2);
+                });
+        }
+
+        // getDataV2
+        function getDataV2() {
+
+            // Variables
+
+            // ActionModel
+            var actionModel = {};
+
+            // Headers
+            var headers = {};
+            headers["api-version"] = "2.0";
+
+            // Post
+            postRequst("home/getData", actionModel, headers)
+
+                // Success
+                .then(function (response) {
+                    document.getElementById("getDataV2.result").innerText = JSON.stringify(response, null, 2);
+                })
+
+                // Error
+                .catch(function (error) {
+                    document.getElementById("getDataV2.result").innerText = JSON.stringify(error, null, 2);
+                });
+        }
+
+        // getDataDefault
+        function getDataDefault() {
+
+            // Variables
+
+            // ActionModel
+            var actionModel = {};
+
+            // Headers
+            var headers = {};
+
+            // Post
+            postRequst("home/getData", actionModel, headers)
+
+                // Success
+                .then(function (response) {
+                    document.getElementById("getDataDefault.result").innerText = JSON.stringify(response, null, 2);
+                })
+
+                // Error
+                .catch(function (error) {
+                    document.getElementById("getDataDefault.result").innerText = JSON.stringify(error, null, 2);
+                });
+        }
+
+    </script>
+</head>
+<body>
+
+    <!--Title-->
+    <h2>ApiVersionLab.Index</h2>
+    <hr />
+
+    <!--GetDataV1-->
+    <button onclick="getDataV1();">GetDataV1</button><br />
+    <br />
+    <div id="getDataV1.result"></div><hr />
+
+    <!--GetDataV2-->
+    <button onclick="getDataV2();">GetDataV2</button><br />
+    <br />
+    <div id="getDataV2.result"></div><hr />
+
+    <!--GetDataDefault-->
+    <button onclick="getDataDefault();">GetDataDefault</button><br />
+    <br />
+    <div id="getDataDefault.result"></div><hr />
+
+</body>
+</html>

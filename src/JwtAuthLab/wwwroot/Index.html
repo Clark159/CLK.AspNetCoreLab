@@ -4,6 +4,7 @@
 <head>
     <meta charset="utf-8" />
     <title></title>
+    <script src="clk.lab.js"></script>
     <script>
 
         // getToken
@@ -36,7 +37,7 @@
             // Variables
             var token = null;
             if (document.getElementById("getToken.result").innerText != "") {
-                token = JSON.parse(document.getElementById("getToken.result").innerText).token;
+                token = JSON.parse(document.getElementById("getToken.result").innerText).content.token;
             }
 
             // ActionModel
@@ -45,7 +46,7 @@
             // Headers
             var headers = {};
             if (token != null) headers["Authorization"] = "Bearer " + token;
-            
+
             // Post
             postRequst("token/getUser", actionModel, headers)
 
@@ -58,58 +59,6 @@
                 .catch(function (error) {
                     document.getElementById("getUser.result").innerText = JSON.stringify(error, null, 2);
                 });
-        }
-
-        // PostRequst
-        function postRequst(url, body, headers) {
-
-            // Headers
-            if (headers == null) headers = {};
-            if (headers["Content-Type"] == null) headers["Content-Type"] = "application/json";
-            if (headers["Accept"] == null) headers["Accept"] = "application/json";
-
-            // Post
-            var task = fetch(url, {
-                method: "POST",
-                headers: headers,
-                body: JSON.stringify(body)
-            })
-
-            // Response
-            .then(function (response) {
-                return response.text().then(function (text) {
-
-                    // Success
-                    if (response.ok == true) {
-                        return text ? JSON.parse(text) : {};
-                    }
-
-                    // Error
-                    if (response.ok == false) {
-                        var error = text ? JSON.parse(text) : {};
-                        error.status = response.status;
-                        throw error
-                    }
-                })
-            })
-
-            // Error
-            .catch(function (error) {
-
-                // Local
-                if (error instanceof TypeError == true) {
-                    throw {
-                        errorCode: 999,
-                        message: "Connection Failed"
-                    }
-                };
-
-                // Remote
-                throw error;
-            });
-
-            // Return
-            return task;
         }
 
     </script>

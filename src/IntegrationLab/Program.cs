@@ -7,7 +7,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace EmptyLab
+namespace IntegrationLab
 {
     public class Program
     {

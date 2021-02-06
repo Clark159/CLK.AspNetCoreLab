@@ -10,7 +10,7 @@ namespace AreaLab.Main
     public class HomeController : Controller
     {
         // Methods
-        public IActionResult Index()
+        public ActionResult Index()
         {            
             return View();
         }

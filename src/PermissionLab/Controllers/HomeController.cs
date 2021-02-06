@@ -9,11 +9,11 @@ using System.Threading.Tasks;
 
 namespace PermissionLab
 {
-    public partial class HomeController : ControllerBase
+    public partial class HomeController : Controller
     {
         // Methods
         [Authorize]
-        public GetUserResultModel GetUser001([FromBody] GetUserActionModel actionModel)
+        public ActionResult<GetUserResultModel> GetUser001([FromBody] GetUserActionModel actionModel)
         {
             #region Contracts
 
@@ -26,7 +26,7 @@ namespace PermissionLab
         }
 
         [Authorize]
-        public GetUserResultModel GetUser002([FromBody] GetUserActionModel actionModel)
+        public ActionResult<GetUserResultModel> GetUser002([FromBody] GetUserActionModel actionModel)
         {
             #region Contracts
 
