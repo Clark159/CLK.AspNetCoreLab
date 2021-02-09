@@ -4,10 +4,13 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc.Razor;
 using Microsoft.AspNetCore.Mvc.Versioning;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.FileProviders;
 using Microsoft.Extensions.Hosting;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Threading.Tasks;
 
 namespace IntegrationLab
@@ -47,14 +50,32 @@ namespace IntegrationLab
 
             #endregion
 
+            // EntryDirectory
+            var entryDirectory = AppContext.BaseDirectory;
+            if (Directory.Exists(entryDirectory) == false) throw new InvalidOperationException($"{nameof(entryDirectory)}=null");
+
             // Development
             if (env.IsDevelopment() == true)
             {
                 app.UseDeveloperExceptionPage();
             }
 
-            // StaticFile
-            app.UseStaticFiles();
+            // StaticFiles
+            {
+                // ModuleAssembly
+                var moduleAssembly = Assembly.LoadFile(Path.Combine(entryDirectory, $"IntegrationLab.Module.dll"));
+                if (moduleAssembly == null) throw new InvalidOperationException($"{nameof(moduleAssembly)}=null");
+
+                // Use
+                app.UseStaticFiles(new StaticFileOptions()
+                {
+                    FileProvider = new CompositeFileProvider
+                    (
+                       env.WebRootFileProvider,
+                       new ModuleWebAssetsFileProvider(moduleAssembly)
+                    )
+                });
+            }
 
             // Routing
             app.UseRouting();

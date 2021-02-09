@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace IntegrationLab
 {
+    [Module("CLK-Lab-Module01")]
     public class HomeController : Controller
     {
         // Methods

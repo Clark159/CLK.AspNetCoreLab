@@ -2,10 +2,16 @@
 
   <PropertyGroup>
     <TargetFramework>net5.0</TargetFramework>
+    <UserSecretsId>ee78f259-8b02-4dd3-b02c-96e5cd94d96d</UserSecretsId>
   </PropertyGroup>
 
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Mvc.Versioning" Version="4.2.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\IntegrationLab.AspNetCore\IntegrationLab.AspNetCore.csproj" />
+    <ProjectReference Include="..\IntegrationLab.Module\IntegrationLab.Module.csproj" />
   </ItemGroup>
 
 </Project>

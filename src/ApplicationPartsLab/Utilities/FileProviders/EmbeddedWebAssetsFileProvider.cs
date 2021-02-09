@@ -19,7 +19,7 @@ namespace ApplicationPartsLab
 
 
         // Fields
-        private readonly string _subpathPrefix = null;
+        private readonly string _pathPrefix = null;
 
         private readonly IFileProvider _innerProvider = null;
 
@@ -34,7 +34,7 @@ namespace ApplicationPartsLab
             #endregion
 
             // Default
-            _subpathPrefix = string.Format(_pathPrefixFormat, assembly.GetName().Name);
+            _pathPrefix = string.Format(_pathPrefixFormat, assembly.GetName().Name);
             _innerProvider = new ManifestEmbeddedFileProvider(assembly, _contentRoot);
         }
 
@@ -56,7 +56,6 @@ namespace ApplicationPartsLab
             return _innerProvider.GetDirectoryContents(contentPath);
         }
 
-        /// <inheritdoc />
         public IFileInfo GetFileInfo(string subpath)
         {
             #region Contracts
@@ -89,6 +88,7 @@ namespace ApplicationPartsLab
             return _innerProvider.Watch(contentPath);
         }
 
+
         private string GetContentPath(string subpath)
         {
             #region Contracts
@@ -98,10 +98,10 @@ namespace ApplicationPartsLab
             #endregion
 
             // Require
-            if (subpath.StartsWith(_subpathPrefix, StringComparison.OrdinalIgnoreCase) == false) return null;
+            if (subpath.StartsWith(_pathPrefix, StringComparison.OrdinalIgnoreCase) == false) return null;
 
             // ContentPath
-            var contentPath = subpath.Substring(_subpathPrefix.Length);
+            var contentPath = subpath.Substring(_pathPrefix.Length);
             if (string.IsNullOrEmpty(contentPath) == true) return null;
 
             // Return
