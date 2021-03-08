@@ -35,9 +35,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IntegrationLab.Module", "In
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IntegrationLab.AspNetCore", "IntegrationLab.AspNetCore\IntegrationLab.AspNetCore.csproj", "{1EC31C21-02DD-470C-8081-A620CC263761}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MiddlewareLab", "MiddlewareLab\MiddlewareLab.csproj", "{E0533628-AD62-4F28-B39C-BE70BF284FC7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MiddlewareLab", "MiddlewareLab\MiddlewareLab.csproj", "{E0533628-AD62-4F28-B39C-BE70BF284FC7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RoutingEndpointsLab", "RoutingEndpointsLab\RoutingEndpointsLab.csproj", "{1BB752DA-03D8-43C0-AFF9-1D25C81A53AF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RoutingEndpointsLab", "RoutingEndpointsLab\RoutingEndpointsLab.csproj", "{1BB752DA-03D8-43C0-AFF9-1D25C81A53AF}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Shared", "Shared", "{427DEC03-F6DD-4688-9103-C3DFF861458B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -120,6 +122,9 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{D1DD2D78-886A-4239-83E1-7C9466026F2B} = {427DEC03-F6DD-4688-9103-C3DFF861458B}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {CBB7D75C-988E-4A62-8EB5-C26F026248F5}
