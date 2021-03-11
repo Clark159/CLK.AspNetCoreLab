@@ -6,6 +6,7 @@ namespace WildcardMatchLab
 {
     public class Program
     {
+        // Methods
         public static void Main(string[] args)
         {
             // Variables

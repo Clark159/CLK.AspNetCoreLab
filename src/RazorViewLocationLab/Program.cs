@@ -11,6 +11,7 @@ namespace RazorViewLocationLab
 {
     public class Program
     {
+        // Methods
         public static void Main(string[] args)
         {
             CreateHostBuilder(args).Build().Run();
