@@ -33,7 +33,7 @@ namespace RazorClassLibraryLab
                 }
 
                 // ModuleAssembly
-                var moduleAssembly = Assembly.LoadFile(Path.Combine(baseDirectory, $"{entryAssembly.GetName().Name}.Module.dll"));
+                var moduleAssembly = Assembly.LoadFrom(Path.Combine(baseDirectory, $"{entryAssembly.GetName().Name}.Module.dll"));
                 if (moduleAssembly == null) throw new InvalidOperationException($"{nameof(moduleAssembly)}=null");
                 {
                     // ModuleResources

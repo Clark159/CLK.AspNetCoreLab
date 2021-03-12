@@ -30,11 +30,11 @@ namespace ApplicationPartsLab
             if (Directory.Exists(entryDirectory) == false) throw new InvalidOperationException($"{nameof(entryDirectory)}=null");
 
             // ModuleAssembly
-            _moduleAssembly = Assembly.LoadFile(Path.Combine(entryDirectory, $"{_moduleName}.dll"));
+            _moduleAssembly = Assembly.LoadFrom(Path.Combine(entryDirectory, $"{_moduleName}.dll"));
             if (_moduleAssembly == null) throw new InvalidOperationException($"{nameof(_moduleAssembly)}=null");
 
             // ModuleViewAssembly
-            _moduleViewAssembly = Assembly.LoadFile(Path.Combine(entryDirectory, $"{_moduleName}.Views.dll"));
+            _moduleViewAssembly = Assembly.LoadFrom(Path.Combine(entryDirectory, $"{_moduleName}.Views.dll"));
             if (_moduleViewAssembly == null) throw new InvalidOperationException($"{nameof(_moduleViewAssembly)}=null");
         }
 
@@ -47,8 +47,7 @@ namespace ApplicationPartsLab
             if (services == null) throw new ArgumentException(nameof(services));
 
             #endregion
-
-            
+                        
             // MvcBuilder
             var mvcBuilder = services.AddMvc();
             {

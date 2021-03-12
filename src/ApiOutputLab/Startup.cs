@@ -23,24 +23,28 @@ namespace ApiOutputLab
             #endregion
 
             // Mvc
-            var mvcBuilder = services.AddMvc(options =>
+            var mvcBuilder = services.AddMvc();
             {
-                // NotAcceptable
-                options.ReturnHttpNotAcceptable = true;
-
-                // BrowserAcceptHeader
-                options.RespectBrowserAcceptHeader = true;
-
-                // OutputFormatters
+                // MvcOptions
+                mvcBuilder.AddMvcOptions((options) =>
                 {
-                    // XML
-                    options.OutputFormatters.Add(new XmlSerializerOutputFormatter());
+                    // NotAcceptable
+                    options.ReturnHttpNotAcceptable = true;
 
-                    // Null
-                    options.OutputFormatters.RemoveType<HttpNoContentOutputFormatter>();
-                    options.OutputFormatters.Insert(0, new NullOutputFormatter());
-                }
-            });
+                    // BrowserAcceptHeader
+                    options.RespectBrowserAcceptHeader = true;
+
+                    // OutputFormatters
+                    {
+                        // XML
+                        options.OutputFormatters.Add(new XmlSerializerOutputFormatter());
+
+                        // Null
+                        options.OutputFormatters.RemoveType<HttpNoContentOutputFormatter>();
+                        options.OutputFormatters.Insert(0, new NullOutputFormatter());
+                    }
+                });
+            }
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)

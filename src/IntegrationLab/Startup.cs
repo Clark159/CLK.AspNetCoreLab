@@ -27,18 +27,19 @@ namespace IntegrationLab
             #endregion
 
             // Mvc
-            services.AddMvc();
-
-            // RazorViewEngine
-            services.Configure<RazorViewEngineOptions>(options =>
+            var mvcBuilder = services.AddMvc();
             {
-                // ViewLocationFormats
+                // RazorOptions
+                mvcBuilder.AddRazorOptions((options) =>
                 {
-                    // Area
-                    options.AreaViewLocationFormats.Add("/Views/{2}/{1}/{0}.cshtml");
-                    options.AreaViewLocationFormats.Add("/Views/{2}/Shared/{0}.cshtml");
-                }
-            });
+                    // ViewLocationFormats
+                    {
+                        // Area
+                        options.AreaViewLocationFormats.Add("/Views/{2}/{1}/{0}.cshtml");
+                        options.AreaViewLocationFormats.Add("/Views/{2}/Shared/{0}.cshtml");
+                    }
+                });
+            }
         }
 
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -63,7 +64,7 @@ namespace IntegrationLab
             // StaticFiles
             {
                 // ModuleAssembly
-                var moduleAssembly = Assembly.LoadFile(Path.Combine(entryDirectory, $"IntegrationLab.Module.dll"));
+                var moduleAssembly = Assembly.LoadFrom(Path.Combine(entryDirectory, $"IntegrationLab.Module.dll"));
                 if (moduleAssembly == null) throw new InvalidOperationException($"{nameof(moduleAssembly)}=null");
 
                 // Use

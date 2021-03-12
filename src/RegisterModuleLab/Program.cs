@@ -21,7 +21,7 @@ namespace RegisterModuleLab
         public static IHostBuilder CreateHostBuilder(string[] args) =>
             Host.CreateDefaultBuilder(args)
                 .UseServiceProviderFactory(new AutofacServiceProviderFactory())
-                .ConfigureWebHostDefaults(webBuilder =>
+                .ConfigureWebHostDefaults((webBuilder) =>
                 {
                     webBuilder.UseStartup<Startup>();
                 });
