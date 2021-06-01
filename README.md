@@ -2,7 +2,7 @@
 
 ## [ASP.NET Core] Authenticate/Authorization 程式範例
 
-使用自定義的Middleware/Handler，展示在ASP.NET Core裡如何進行身分認證/身分授權。
+本篇範例使用自定義的Middleware/Handler，展示如何在ASP.NET Core裡進行身分認證/身分授權。
 
 範例原碼：https://github.com/Clark159/CLK.AspNetCoreLab
 
