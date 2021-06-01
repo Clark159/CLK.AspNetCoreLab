@@ -9,9 +9,9 @@
 範例專案：AuthLab  
 
 執行結果：
-  ![AuthLab執行結果]()
+  - ![AuthLab執行結果](https://raw.githubusercontent.com/Clark159/CLK.AspNetCoreLab/master/doc/AuthLab/%E5%9F%B7%E8%A1%8C%E7%B5%90%E6%9E%9C.png)
 
 參考資料：
   
-  1.[ASP.NET Core 运行原理解剖:Authentication-雨夜朦朧](https://www.cnblogs.com/RainingNight/p/authentication-in-asp-net-core.html)  
+  1. [ASP.NET Core 运行原理解剖:Authentication-雨夜朦朧](https://www.cnblogs.com/RainingNight/p/authentication-in-asp-net-core.html)  
   
