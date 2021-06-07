@@ -1,0 +1,26 @@
+﻿@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@{ 
+
+}
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+</head>
+<body>
+
+    <!--Title-->
+    <h2>Account.Login</h2>
+    <hr />
+
+    <!--Login-->
+    <form asp-controller="Account" asp-action="Login" asp-route-returnUrl="@Context.Request.Query["ReturnUrl"]" method="post">
+        <input type="submit" value="Login" /><br />
+        Username:<input type="text" name="username" value="Clark" /><br />
+        <hr />
+    </form>
+
+</body>
+</html>

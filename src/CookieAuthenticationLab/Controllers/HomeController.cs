@@ -5,15 +5,16 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace AuthLab
+namespace CookieAuthenticationLab
 {
     public class HomeController : Controller
     {
         // Methods
-        //[Authorize]
-        public ActionResult<string> Index()
+        [Authorize]
+        public ActionResult Index()
         {
-            return "Hello World!";
+            // Return
+            return View();
         }
     }
 }

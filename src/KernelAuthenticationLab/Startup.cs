@@ -10,7 +10,7 @@ using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
 
-namespace AuthLab
+namespace KernelAuthenticationLab
 {
     public class Startup
     {
@@ -73,8 +73,8 @@ namespace AuthLab
                     context.Response.Redirect("/");
                 };
             }));
-                     
-            // 4.Authenticate
+
+            // 4.Authentication
             app.Use(async (context, next) =>
             {
                 // User

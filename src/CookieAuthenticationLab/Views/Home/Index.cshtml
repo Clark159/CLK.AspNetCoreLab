@@ -1,0 +1,29 @@
+﻿@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@{
+
+}
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+</head>
+<body>
+
+    <!--Title-->
+    <h2>Home.Index</h2>
+    <hr />
+
+    <!--User-->
+    Hello @User.Identity.Name!<br />
+    <hr />
+
+    <!--Logout-->
+    <form>
+        <button asp-controller="Account" asp-action="Logout">Logout</button><br />
+    </form>
+    <hr />
+
+</body>
+</html>
