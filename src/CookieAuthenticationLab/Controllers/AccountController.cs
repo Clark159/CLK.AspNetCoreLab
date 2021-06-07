@@ -21,10 +21,12 @@ namespace CookieAuthenticationLab
             if (string.IsNullOrEmpty(returnUrl) == true) returnUrl = @"/";
             if (this.User.Identity.IsAuthenticated == true) return this.Redirect(returnUrl);
 
+            // Check
+            // ...
+
             // ClaimsPrincipal
             var claimIdentity = new ClaimsIdentity(CookieAuthenticationDefaults.AuthenticationScheme);
             claimIdentity.AddClaim(new Claim(ClaimTypes.Name, username));
-            claimIdentity.AddClaim(new Claim(ClaimTypes.NameIdentifier, username));
             var claimsPrincipal = new ClaimsPrincipal(claimIdentity);
 
             // SignIn
