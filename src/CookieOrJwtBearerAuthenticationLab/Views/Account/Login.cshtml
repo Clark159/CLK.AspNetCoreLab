@@ -1,0 +1,99 @@
+﻿@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@{ 
+
+}
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <script src="~/clk.lab.js"></script>
+    <script language="javascript">
+        window.onload = function () {
+
+            // GetTokenByPassword
+            document.getElementById("getTokenByPassword.button").addEventListener("click", event => {
+
+                // Variables
+                var username = document.getElementById("getTokenByPassword.username").value;
+
+                // ActionModel
+                var actionModel = {};
+                actionModel.username = username;
+                actionModel.password = "12345";
+
+                // Post
+                postRequst("/Account/GetTokenByPassword", actionModel)
+
+                    // Success
+                    .then(function (response) {
+                        document.getElementById("getTokenByPassword.result").innerText = JSON.stringify(response, null, 2);
+                    })
+
+                    // Error
+                    .catch(function (error) {
+                        document.getElementById("getTokenByPassword.result").innerText = JSON.stringify(error, null, 2);
+                    });
+            });
+
+            // GetUserByToken
+            document.getElementById("getUserByToken.button").addEventListener("click", event => {
+
+                // Variables
+                var token = null;
+                if (document.getElementById("getTokenByPassword.result").innerText != "") {
+                    token = JSON.parse(document.getElementById("getTokenByPassword.result").innerText).content.token;
+                }
+                else { document.getElementById("getUserByToken.result").innerText = "token=null"; return; }
+
+                // ActionModel
+                var actionModel = {};
+
+                // Headers
+                var headers = {};
+                headers["Authorization"] = "Bearer " + token;
+
+                // Post
+                postRequst("/Account/GetUser", actionModel, headers)
+
+                    // Success
+                    .then(function (response) {
+                        document.getElementById("getUserByToken.result").innerText = JSON.stringify(response, null, 2);
+                    })
+
+                    // Error
+                    .catch(function (error) {
+                        document.getElementById("getUserByToken.result").innerText = JSON.stringify(error, null, 2);
+                    });
+            });
+        };
+    </script>
+</head>
+<body>
+
+    <!--Title-->
+    <h2>Account.Login</h2>
+    <hr />
+
+    <!--Login-->
+    <form asp-controller="Account" asp-action="Login" asp-route-returnUrl="@Context.Request.Query["ReturnUrl"]" method="post">
+        <input type="submit" value="Login" /><br />
+        Username:<input type="text" name="username" value="Clark" /><br />
+        <br />
+    </form>
+    <hr />
+
+    <!--GetTokenByPassword-->
+    <input id="getTokenByPassword.button" type="button" value="GetTokenByPassword" /><br />
+    Username:<input id="getTokenByPassword.username" type="text" value="Clark" /><br />
+    <div id="getTokenByPassword.result"></div><br />
+    <hr />
+
+    <!--GetUserByToken-->
+    <input id="getUserByToken.button" type="button" value="GetUserByToken" /><br />
+    <div id="getUserByToken.result"></div><br />
+    <hr />
+
+</body>
+</html>

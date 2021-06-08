@@ -1,0 +1,126 @@
+﻿@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@{
+
+}
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <script src="~/clk.lab.js"></script>
+    <script language="javascript">
+        window.onload = function () {
+
+            // GetTokenByCookie
+            document.getElementById("getTokenByCookie.button").addEventListener("click", event => {
+
+                // Variables
+                
+                // ActionModel
+                var actionModel = {};
+
+                // Post
+                postRequst("/Account/GetToken", actionModel)
+
+                    // Success
+                    .then(function (response) {
+                        document.getElementById("getTokenByCookie.result").innerText = JSON.stringify(response, null, 2);
+                    })
+
+                    // Error
+                    .catch(function (error) {
+                        document.getElementById("getTokenByCookie.result").innerText = JSON.stringify(error, null, 2);
+                    });
+            });
+
+            // GetUserByToken
+            document.getElementById("getUserByToken.button").addEventListener("click", event => {
+
+                // Variables
+                var token = null;
+                if (document.getElementById("getTokenByCookie.result").innerText != "") {
+                    token = JSON.parse(document.getElementById("getTokenByCookie.result").innerText).content.token;
+                }
+                else { document.getElementById("getUserByToken.result").innerText = "token=null"; return; }
+
+                // ActionModel
+                var actionModel = {};
+
+                // Headers
+                var headers = {};
+                headers["Authorization"] = "Bearer " + token;
+
+                // Post
+                postRequst("/Account/GetUser", actionModel, headers)
+
+                    // Success
+                    .then(function (response) {
+                        document.getElementById("getUserByToken.result").innerText = JSON.stringify(response, null, 2);
+                    })
+
+                    // Error
+                    .catch(function (error) {
+                        document.getElementById("getUserByToken.result").innerText = JSON.stringify(error, null, 2);
+                    });
+            });
+
+            // GetUserByCookie
+            document.getElementById("getUserByCookie.button").addEventListener("click", event => {
+
+                // Variables
+
+                // ActionModel
+                var actionModel = {};
+
+                // Post
+                postRequst("/Account/GetUser", actionModel)
+
+                    // Success
+                    .then(function (response) {
+                        document.getElementById("getUserByCookie.result").innerText = JSON.stringify(response, null, 2);
+                    })
+
+                    // Error
+                    .catch(function (error) {
+                        document.getElementById("getUserByCookie.result").innerText = JSON.stringify(error, null, 2);
+                    });
+            });
+        };
+    </script>
+</head>
+<body>
+
+    <!--Title-->
+    <h2>Home.Index</h2>
+    <hr />
+
+    <!--User-->
+    Username= @User.Identity.Name<br />
+    AuthenticationType= @User.Identity.AuthenticationType<br />
+    <hr />
+
+    <!--Logout-->
+    <form>
+        <button asp-controller="Account" asp-action="Logout">Logout</button><br />
+        <br />
+    </form>
+    <hr />
+
+    <!--GetTokenByCookie-->
+    <input id="getTokenByCookie.button" type="button" value="GetTokenByCookie" /><br />
+    <div id="getTokenByCookie.result"></div><br />
+    <hr />
+
+    <!--GetUserByToken-->
+    <input id="getUserByToken.button" type="button" value="GetUserByToken" /><br />
+    <div id="getUserByToken.result"></div><br />
+    <hr />
+
+    <!--GetUserByCookie-->
+    <input id="getUserByCookie.button" type="button" value="GetUserByCookie" /><br />
+    <div id="getUserByCookie.result"></div><br />
+    <hr />
+
+</body>
+</html>

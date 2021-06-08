@@ -21,7 +21,7 @@ namespace CookieAuthenticationLab
             if (string.IsNullOrEmpty(returnUrl) == true) returnUrl = @"/";
             if (this.User.Identity.IsAuthenticated == true) return this.Redirect(returnUrl);
 
-            // Check
+            // Validate
             // ...
 
             // ClaimsPrincipal

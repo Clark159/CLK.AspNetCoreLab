@@ -38,7 +38,7 @@ namespace PermissionLab
             // GetToken
             return (new GetTokenResultModel()
             {
-                Token = _jwtHelper.CreateToken(actionModel.UserId, actionModel.UserName, new List<string>() { "Admin", "User" })
+                Token = _jwtHelper.CreateToken(actionModel.UserId, actionModel.Username, new List<string>() { "Admin", "User" })
             });
         }
 
@@ -49,7 +49,7 @@ namespace PermissionLab
             // Properties
             public string UserId { get; set; }
 
-            public string UserName { get; set; }
+            public string Username { get; set; }
         }
 
         public class GetTokenResultModel
