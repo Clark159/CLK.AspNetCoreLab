@@ -19,7 +19,7 @@
   1. 進入頁面後，會先顯示目前登入的User資料。(authenticationType="Cookies")
   2. 點擊GetTokenByCookie按鈕，將會使用Cookie進行身分驗證，並發放Token回傳。
   3. 點擊GetUserByToken按鈕，將會使用步驟1取得的Token進行身分驗證，並回傳目前登入的User資料。(authenticationType="JwtBearer")
-  4. 點擊GetUserByToken按鈕，將會使用Cookie進行身分驗證，並回傳目前登入的User資料。(authenticationType="Cookies")
+  4. 點擊GetUserByCookie按鈕，將會使用Cookie進行身分驗證，並回傳目前登入的User資料。(authenticationType="Cookies")
   5. 點擊Logout按鈕，將會刪除Cookie，並轉頁至Login頁面。
   
   
