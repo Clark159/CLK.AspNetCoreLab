@@ -15,7 +15,7 @@
   2. 點擊GetUserByToken按鈕，將會使用步驟1取得的Token進行身分驗證，並回傳目前登入的User資料。(authenticationType="JwtBearer")
   3. 點擊Login按鈕，將會使用Username、Password進行身分驗證，並發放Cookie後轉頁至Home頁面。
   
-- Home.Index、狀態：未登入 
+- Home.Index、狀態：已登入 
   1. 進入頁面後，會先顯示目前登入的User資料。(authenticationType="Cookies")
   2. 點擊GetTokenByCookie按鈕，將會使用Cookie進行身分驗證，並發放Token回傳。
   3. 點擊GetUserByToken按鈕，將會使用步驟1取得的Token進行身分驗證，並回傳目前登入的User資料。(authenticationType="JwtBearer")
