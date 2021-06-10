@@ -10,7 +10,6 @@ using System.Threading.Tasks;
 
 namespace CookieOrJwtBearerAuthenticationLab
 {
-    [AllowAnonymous]
     public partial class AccountController : Controller
     {
         // Fields
@@ -32,6 +31,7 @@ namespace CookieOrJwtBearerAuthenticationLab
 
 
         // Methods  
+        [AllowAnonymous]
         public async Task<ActionResult> Login(string username = null, string password = null, string returnUrl = @"/")
         {
             // Require
@@ -54,6 +54,7 @@ namespace CookieOrJwtBearerAuthenticationLab
             return this.Redirect(returnUrl);
         }
 
+        [AllowAnonymous]
         public async Task<ActionResult> Logout()
         {
             // Require
