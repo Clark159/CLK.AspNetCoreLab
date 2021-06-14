@@ -30,21 +30,36 @@ namespace CookieOrJwtBearerAuthenticationLab
         }
 
 
-        // Methods  
+        // Methods
+        [HttpGet]
         [AllowAnonymous]
-        public async Task<ActionResult> Login(string username = null, string password = null, string returnUrl = @"/")
+        public ActionResult Login(string returnUrl = @"/")
         {
             // Require
-            if (string.IsNullOrEmpty(username) == true) return View();
-            if (string.IsNullOrEmpty(returnUrl) == true) returnUrl = @"/";
             if (this.User.Identity.IsAuthenticated == true) return this.Redirect(returnUrl);
 
-            // Validate
+            // Return
+            return View();
+        }
+
+        [AllowAnonymous]
+        public async Task<ActionResult> Login(string userName, string password = null, string returnUrl = @"/")
+        {
+            #region Contracts
+
+            if (string.IsNullOrEmpty(userName) == true) throw new ArgumentException(nameof(userName));
+
+            #endregion
+
+            // Require
+            if (this.User.Identity.IsAuthenticated == true) return this.Redirect(returnUrl);
+
+            // Validate Password
             // ...
 
             // ClaimsPrincipal
             var claimIdentity = new ClaimsIdentity(CookieAuthenticationDefaults.AuthenticationScheme);
-            claimIdentity.AddClaim(new Claim(ClaimTypes.Name, username));
+            claimIdentity.AddClaim(new Claim(ClaimTypes.Name, userName));
             var claimsPrincipal = new ClaimsPrincipal(claimIdentity);
 
             // SignIn
@@ -83,7 +98,7 @@ namespace CookieOrJwtBearerAuthenticationLab
 
             // UserModel
             var user = new UserModel();
-            user.Username = this.User.Identity.Name;
+            user.UserName = this.User.Identity.Name;
             user.AuthenticationType = this.User.Identity.AuthenticationType;
 
             // Return
@@ -110,7 +125,7 @@ namespace CookieOrJwtBearerAuthenticationLab
         public class UserModel
         {
             // Properties
-            public string Username { get; set; }
+            public string UserName { get; set; }
 
             public string AuthenticationType { get; set; }
         }
@@ -173,15 +188,14 @@ namespace CookieOrJwtBearerAuthenticationLab
             #endregion
 
             // Require
-            if (string.IsNullOrEmpty(actionModel.Username) == true) throw new InvalidOperationException($"{nameof(actionModel.Username)}=null");
-            if (string.IsNullOrEmpty(actionModel.Password) == true) throw new InvalidOperationException($"{nameof(actionModel.Password)}=null");
-
-            // Validate
+            if (string.IsNullOrEmpty(actionModel.UserName) == true) throw new InvalidOperationException($"{nameof(actionModel.UserName)}=null");
+           
+            // Validate Password
             // ...
 
             // ClaimIdentity
             var claimIdentity = new ClaimsIdentity(CookieAuthenticationDefaults.AuthenticationScheme);
-            claimIdentity.AddClaim(new Claim(ClaimTypes.Name, actionModel.Username));
+            claimIdentity.AddClaim(new Claim(ClaimTypes.Name, actionModel.UserName));
 
             // TokenString
             var tokenString = _tokenFactory.CreateEncodedJwt(claimIdentity.Claims);
@@ -199,7 +213,7 @@ namespace CookieOrJwtBearerAuthenticationLab
         public class GetTokenByPasswordActionModel
         {
             // Properties
-            public string Username { get; set; }
+            public string UserName { get; set; }
 
             public string Password { get; set; }
         }

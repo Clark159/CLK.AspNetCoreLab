@@ -18,9 +18,10 @@
     <!--Login-->
     <form asp-controller="Account" asp-action="Login" asp-route-returnUrl="@Context.Request.Query["ReturnUrl"]" method="post">
         <input type="submit" value="Login" /><br />
-        Username:<input type="text" name="username" value="Clark" /><br />
-        <hr />
+        UserName:<input type="text" name="userName" value="Clark" /><br />
+        <br />
     </form>
+    <hr />
 
 </body>
 </html>

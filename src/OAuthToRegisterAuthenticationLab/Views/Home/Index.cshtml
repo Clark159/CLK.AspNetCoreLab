@@ -1,0 +1,39 @@
+﻿@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@using OAuthToRegisterAuthenticationLab
+@using System.Security.Claims
+@{
+    string GetClaimValue(string claimType)
+    {
+        return (User.Identity as ClaimsIdentity)?.FindFirst(claimType)?.Value;
+    }
+}
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <script src="~/clk.lab.js"></script>
+</head>
+<body>
+
+    <!--Title-->
+    <h2>Home.Index</h2>
+    <hr />
+
+    <!--User-->
+    AuthenticationType= @User.Identity.AuthenticationType<br />
+    UserId= @GetClaimValue(OAuthToRegisterAuthenticationLab.ApplicationIdentity.DefaultUserIdClaimType)<br />
+    UserName= @GetClaimValue(OAuthToRegisterAuthenticationLab.ApplicationIdentity.DefaultUserNameClaimType)<br />
+    NickName= @GetClaimValue(OAuthToRegisterAuthenticationLab.ApplicationIdentity.DefaultNickNameClaimType)<br />
+    <hr />
+
+    <!--Logout-->
+    <form>
+        <button asp-controller="Account" asp-action="Logout">Logout</button><br />
+        <br />
+    </form>
+    <hr />
+
+</body>
+</html>

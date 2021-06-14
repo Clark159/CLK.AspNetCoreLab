@@ -16,12 +16,13 @@
             document.getElementById("getTokenByPassword.button").addEventListener("click", event => {
 
                 // Variables
-                var username = document.getElementById("getTokenByPassword.username").value;
+                var userName = document.getElementById("getTokenByPassword.userName").value;
+                var password = document.getElementById("getTokenByPassword.password").value;
 
                 // ActionModel
                 var actionModel = {};
-                actionModel.username = username;
-                actionModel.password = "12345";
+                actionModel.userName = userName;
+                actionModel.password = password;
 
                 // Post
                 postRequst("/Account/GetTokenByPassword", actionModel)
@@ -79,14 +80,15 @@
     <!--Login-->
     <form asp-controller="Account" asp-action="Login" asp-route-returnUrl="@Context.Request.Query["ReturnUrl"]" method="post">
         <input type="submit" value="Login" /><br />
-        Username:<input type="text" name="username" value="Clark" /><br />
+        UserName:<input type="text" name="userName" value="Clark" /><br />
         <br />
     </form>
     <hr />
 
     <!--GetTokenByPassword-->
     <input id="getTokenByPassword.button" type="button" value="GetTokenByPassword" /><br />
-    Username:<input id="getTokenByPassword.username" type="text" value="Clark" /><br />
+    UserName:<input id="getTokenByPassword.userName" type="text" value="Clark" /><br />
+    Password:<input id="getTokenByPassword.password" type="password" value="" /><br />
     <div id="getTokenByPassword.result"></div><br />
     <hr />
 

@@ -51,7 +51,7 @@ namespace CookieOrJwtBearerAuthenticationLab
 
             // ClaimList
             var claimList = new List<Claim>(identity.Claims);
-            claimList.Add(new Claim(ClaimTypes.Name, identity.Name)); // Username
+            claimList.Add(new Claim(ClaimTypes.Name, identity.Name)); // UserName
 
             // CreateEncodedJwt
             return this.CreateEncodedJwt(claimList);

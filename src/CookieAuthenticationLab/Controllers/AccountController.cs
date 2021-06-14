@@ -10,23 +10,38 @@ using System.Threading.Tasks;
 
 namespace CookieAuthenticationLab
 {
-    [AllowAnonymous]
     public class AccountController : Controller
     {
-        // Methods  
-        public async Task<ActionResult> Login(string username = null, string returnUrl = @"/")
+        // Methods
+        [HttpGet]
+        [AllowAnonymous]
+        public ActionResult Login(string returnUrl = @"/")
         {
             // Require
-            if (string.IsNullOrEmpty(username) == true) return View();
-            if (string.IsNullOrEmpty(returnUrl) == true) returnUrl = @"/";
             if (this.User.Identity.IsAuthenticated == true) return this.Redirect(returnUrl);
 
-            // Validate
+            // Return
+            return View();
+        }
+
+        [AllowAnonymous]
+        public async Task<ActionResult> Login(string userName, string password = null, string returnUrl = @"/")
+        {
+            #region Contracts
+
+            if (string.IsNullOrEmpty(userName) == true) throw new ArgumentException(nameof(userName));
+
+            #endregion
+
+            // Require
+            if (this.User.Identity.IsAuthenticated == true) return this.Redirect(returnUrl);
+
+            // Validate Password
             // ...
 
             // ClaimsPrincipal
             var claimIdentity = new ClaimsIdentity(CookieAuthenticationDefaults.AuthenticationScheme);
-            claimIdentity.AddClaim(new Claim(ClaimTypes.Name, username));
+            claimIdentity.AddClaim(new Claim(ClaimTypes.Name, userName));
             var claimsPrincipal = new ClaimsPrincipal(claimIdentity);
 
             // SignIn
@@ -36,6 +51,7 @@ namespace CookieAuthenticationLab
             return this.Redirect(returnUrl);
         }
 
+        [AllowAnonymous]
         public async Task<ActionResult> Logout()
         {
             // Require

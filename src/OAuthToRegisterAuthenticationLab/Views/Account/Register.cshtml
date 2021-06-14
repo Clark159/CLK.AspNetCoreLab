@@ -1,0 +1,41 @@
+﻿@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@using OAuthToRegisterAuthenticationLab
+@model AccountController.RegisterViewModel
+@{
+
+}
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+    <script src="~/clk.lab.js"></script>
+
+</head>
+<body>
+
+    <!--Title-->
+    <h2>Account.Register</h2>
+    <hr />
+
+    <!--Register-->
+    <form asp-action="Register" asp-route-returnUrl="@Context.Request.Query["ReturnUrl"]" method="post">
+        <input type="submit" value="Register" /><br />
+        UserId:<input type="text" name="userId" value="@Model.UserId" /><br />
+        UserName:<input type="text" name="userName" value="@Model.UserName" /><br />
+        NickName:<input type="text" name="nickName" value="@Model.NickName" /><br />
+        Password:<input type="password" name="password" value="" /><br />
+        <div style="color:red">@Model.Message</div><br />
+    </form>
+    <hr />
+
+    <!--Cancel-->
+    <a asp-action="Login" asp-route-returnUrl="@Context.Request.Query["ReturnUrl"]">
+        <input type="submit" value="Cancel" /><br />
+        <br />
+    </a>
+    <hr />
+
+</body>
+</html>

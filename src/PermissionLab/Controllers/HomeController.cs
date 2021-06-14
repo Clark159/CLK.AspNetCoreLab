@@ -51,7 +51,7 @@ namespace PermissionLab
             user.IsAuthenticated = this.User.Identity.IsAuthenticated;
             user.AuthenticationType = this.User.Identity.AuthenticationType;
             user.UserId = (this.User.Identity as ClaimsIdentity)?.Claims.Where(x => x.Type == ClaimTypes.NameIdentifier).FirstOrDefault()?.Value;
-            user.Username = (this.User.Identity as ClaimsIdentity)?.Name;
+            user.UserName = (this.User.Identity as ClaimsIdentity)?.Name;
             user.RoleList = (this.User.Identity as ClaimsIdentity)?.Claims.Where(x => x.Type == ClaimTypes.Role).Select(y => y.Value).ToList();
 
             // GetUser
@@ -84,7 +84,7 @@ namespace PermissionLab
 
             public string? UserId { get; set; }
 
-            public string? Username { get; set; }
+            public string? UserName { get; set; }
 
             public List<string> RoleList { get; set; }
 

@@ -62,6 +62,7 @@ namespace CookieOrJwtBearerAuthenticationLab
                 // Action
                 options.LoginPath = new PathString("/Account/Login");
                 options.LogoutPath = new PathString("/Account/Logout");
+                options.AccessDeniedPath = options.LoginPath;
             })
             .AddJwtBearer(options =>
             {

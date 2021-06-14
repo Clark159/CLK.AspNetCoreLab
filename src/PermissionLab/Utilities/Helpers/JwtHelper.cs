@@ -37,7 +37,7 @@ namespace PermissionLab
                 
                 // ClaimTypes
                 claims.Add(new Claim(ClaimTypes.NameIdentifier, userId)); // UserId
-                claims.Add(new Claim(ClaimTypes.Name, userName)); // Username
+                claims.Add(new Claim(ClaimTypes.Name, userName)); // UserName
                 {
                     // Role
                     foreach(var role in roleList)

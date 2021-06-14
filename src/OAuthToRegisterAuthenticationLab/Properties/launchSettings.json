@@ -3,8 +3,8 @@
     "windowsAuthentication": false,
     "anonymousAuthentication": true,
     "iisExpress": {
-      "applicationUrl": "http://localhost:54529",
-      "sslPort": 44382
+      "applicationUrl": "http://localhost:31658",
+      "sslPort": 44311
     }
   },
   "profiles": {
@@ -15,7 +15,7 @@
         "ASPNETCORE_ENVIRONMENT": "Development"
       }
     },
-    "Facebook2RegisterAuthenticationLab": {
+    "OAuthToRegisterAuthenticationLab": {
       "commandName": "Project",
       "dotnetRunMessages": "true",
       "launchBrowser": true,
