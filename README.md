@@ -1,8 +1,8 @@
 # CLK.AspNetCoreLab
 
-## [ASP.NET Core] OAuth驗證後註冊的身分驗證範例
+## [ASP.NET Core] OAuth驗證後進行註冊的身分驗證範例
 
-本篇範例展示如何在ASP.NET Core裡，使用OAuth驗證後要求用戶註冊，註冊完成才允許登入的身分驗證機制。(已註冊過直接登入)
+本篇範例展示如何在ASP.NET Core裡，使用OAuth驗證後要求用戶進行註冊，註冊完成才允許登入的身分驗證機制。(已註冊過直接登入)
 
 範例原碼：https://github.com/Clark159/CLK.AspNetCoreLab
 
