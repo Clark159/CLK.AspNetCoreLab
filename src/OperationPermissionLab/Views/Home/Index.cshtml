@@ -1,0 +1,57 @@
+﻿@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@using Microsoft.AspNetCore.Authorization
+@using OperationPermissionLab
+@inject IAuthorizationService _authorizationService
+@{
+
+}
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title></title>
+</head>
+<body>
+
+    <!--Title-->
+    <h2>Home.Index</h2>
+    <hr />
+
+    <!--Logout-->
+    <form asp-controller="Account" asp-action="Logout" method="post">
+        <input type="submit" value="Logout" /><br />
+        UserName:@User.Identity.Name<br />
+        <br />
+    </form>
+    <hr />
+
+    <!--Home.Add-->
+    @if ((await _authorizationService.AuthorizeAsync(this.User, null, new OperationPermissionRequirement() { OperationName = "Home.Add" })).Succeeded)
+    {
+        <form asp-controller="Home" asp-action="Add" method="get">
+            <input type="submit" value="Home.Add" /><br />
+            <br />
+        </form>
+        <hr />
+    }
+
+    <!--Home.Remove-->
+    @if ((await _authorizationService.AuthorizeAsync(this.User, null, new OperationPermissionRequirement() { OperationName = "Home.Remove" })).Succeeded)
+    {
+        <form asp-controller="Home" asp-action="Remove" method="get">
+            <input type="submit" value="Home.Remove" /><br />
+            <br />
+        </form>
+        <hr />
+    }
+
+    <!--Home.Update-->
+    <form asp-controller="Home" asp-action="Update" method="get">
+        <input type="submit" value="Home.Update" /><br />
+        <br />
+    </form>
+    <hr />
+
+</body>
+</html>

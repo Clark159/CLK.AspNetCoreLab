@@ -1,5 +1,53 @@
 # CLK.AspNetCoreLab
 
+
+## [ASP.NET Core] PathPermission 身分授權範例
+
+本篇範例程式，展示如何使用自定義的 PathPermission，進行URL層級身分授權(沒權限的URL，跳至302 Access Denied)。
+
+範例原碼：https://github.com/Clark159/CLK.AspNetCoreLab
+
+範例專案：PathPermissionLab
+
+測試步驟：
+  1. 權限設定於 MockPathPermissionRepository.cs。 
+  2. 執行PathPermissionLab專案
+  3. 於Account.Login頁面點擊Login:Clark按鈕，以Clark身分登入。(Clark擁有：「/Home/*」授權)
+  4. 於Home.Index頁面，可以看到按鈕：Home.Add、Home.Remove、Home.Update。
+  5. 依次點選按鈕，允許進入各自的頁面：/Home/Add、/Home/Remove、/Home/Update。(URL層級身分授權)
+  6. 於Home.Index頁面，點擊登出按鈕，回到Account.Login頁面。
+  7. 於Account.Login頁面點擊Login:Jane按鈕，以Jane身分登入。(Jane只擁有：「/Home/Add」授權)
+  8. 於Home.Index頁面，可以看到按鈕：Home.Add、Home.Remove、Home.Update。
+  9. 點選Home.Add按鈕，允許進入頁面：/Home/Add。(URL層級身分授權)
+  10. 點選Home.Remove按鈕，不允許進入/Home/Remove頁面，並跳轉至302 Access Denied。(URL層級身分授權)
+  11. 點選Home.Update按鈕，不允許進入/Home/Update頁面，並跳轉至302 Access Denied。(URL層級身分授權)
+  
+  
+## [ASP.NET Core] OperationPermission 身分授權範例
+
+本篇範例程式，展示如何使用自定義的 OperationPermission，進行View層級身分授權(沒權限看不到按鈕)、進行Action層級身分授權(沒權限跳至302 Access Denied)。
+
+範例原碼：https://github.com/Clark159/CLK.AspNetCoreLab
+
+範例專案：OperationPermissionLab
+
+測試步驟：
+  1. 權限設定於 MockOperationPermissionRepository.cs。 
+  2. 執行OperationPermissionLab專案
+  3. 於Account.Login頁面點擊Login:Clark按鈕，以Clark身分登入。(Clark擁有：Home.Add、Home.Remove、Home.Update授權)
+  4. 於Home.Index頁面，可以看到按鈕：Home.Add、Home.Remove、Home.Update。(View層級身分授權)
+  5. 依次點選按鈕，允許進入各自的頁面：Home.Add、Home.Remove、Home.Update。(Action層級身分授權)
+  6. 於Home.Index頁面，點擊登出按鈕，回到Account.Login頁面。
+  7. 於Account.Login頁面點擊Login:Jane按鈕，以Jane身分登入。(Jane擁有：Home.Add授權)
+  8. 於Home.Index頁面，可以看到按鈕：Home.Add。(View層級身分授權、Home.Update是特地留下來測試用)
+  9. 點選Home.Add按鈕，允許進入Home.Add頁面。(Action層級身分授權)
+  10. 點選Home.Update按鈕，不允許進入Home.Update頁面，並跳轉至302 Access Denied。(Action層級身分授權)
+
+參考資料：
+  
+  1. [ASP.NET Core 认证与授权7动态授权-雨夜朦朧](https://www.cnblogs.com/RainingNight/tag/Authorization/)  
+  
+  
 ## [ASP.NET Core] OAuth驗證後進行註冊的身分驗證範例
 
 本篇範例展示如何在ASP.NET Core裡，使用OAuth驗證後要求用戶進行註冊，註冊完成才允許登入的身分驗證機制。(已註冊過直接登入)
@@ -25,27 +73,27 @@
 測試步驟：
 
 - OAuth登入後進行註冊，狀態：用戶資料未註冊
-  1. 於LocalHost網站的Account.Login頁面點擊LoginByGoogle按鈕，執行Account.ExternalLogin，並開啟Google網站進行OAuth的登入及授權。
+  1. 於localhost網站的Account.Login頁面點擊LoginByGoogle按鈕，執行Account.ExternalLogin，並開啟Google網站進行OAuth的登入及授權。
   2. (背景作業)Google完成OAuth的登入及授權後，重新導向至https://localhost:44311/Account/Google-OAuth-SignIn。
-  3. (背景作業)LocalHost網站將Google回傳的OAuth授權資料，儲存至ExternalCookie，並導頁至Account.ExternalSignIn。
-  4. (背景作業)LocalHost網站執行Account.ExternalSignIn，使用ExternalCookie的OAuth授權資料，確認用戶沒有註冊資訊後，導頁至Account.Register。
-  5. 於LocalHost網站的Account.Register頁面，填寫註冊資料後點擊Register按鈕完成用戶註冊後，將用戶資訊儲存至ApplicationCookie並轉頁至Home.Index頁面。(已登入)
-  6. 於LocalHost網站的Home.Index頁面，可以看到目前登入的用戶資訊。：已登入，使用Google-OAuth。
-  7. 於LocalHost網站的Home.Index頁面點擊Logout按鈕，進行登出後完成測試。
+  3. (背景作業)localhost網站將Google回傳的OAuth授權資料，儲存至ExternalCookie，並導頁至Account.ExternalSignIn。
+  4. (背景作業)localhost網站執行Account.ExternalSignIn，使用ExternalCookie的OAuth授權資料，確認用戶沒有註冊資訊後，導頁至Account.Register。
+  5. 於localhost網站的Account.Register頁面，填寫註冊資料後點擊Register按鈕完成用戶註冊後，將用戶資訊儲存至ApplicationCookie並轉頁至Home.Index頁面。(已登入)
+  6. 於localhost網站的Home.Index頁面，可以看到目前登入的用戶資訊。：已登入，使用Google-OAuth。
+  7. 於localhost網站的Home.Index頁面點擊Logout按鈕，進行登出後完成測試。
 
 - OAuth登入後無須註冊，狀態：用戶資料已註冊
-  1. 於LocalHost網站的Account.Login頁面點擊LoginByGoogle按鈕，執行Account.ExternalLogin，並開啟Google網站進行OAuth的登入及授權。
+  1. 於localhost網站的Account.Login頁面點擊LoginByGoogle按鈕，執行Account.ExternalLogin，並開啟Google網站進行OAuth的登入及授權。
   2. (背景作業)Google完成OAuth的登入及授權後，重新導向至https://localhost:44311/Account/Google-OAuth-SignIn。
-  3. (背景作業)LocalHost網站將Google回傳的OAuth授權資料，儲存至ExternalCookie，並導頁至Account.ExternalSignIn。
-  4. (背景作業)LocalHost網站執行Account.ExternalSignIn，使用ExternalCookie的OAuth授權資料，確認用戶擁有註冊資訊後，將用戶資訊儲存至ApplicationCookie並轉頁至Home.Index頁面。(已登入)
-  5. 於LocalHost網站的Home.Index頁面，可以看到目前登入的用戶資訊：已登入，使用Google-OAuth。
-  6. 於LocalHost網站的Home.Index頁面點擊Logout按鈕，進行登出後完成測試。
+  3. (背景作業)localhost網站將Google回傳的OAuth授權資料，儲存至ExternalCookie，並導頁至Account.ExternalSignIn。
+  4. (背景作業)localhost網站執行Account.ExternalSignIn，使用ExternalCookie的OAuth授權資料，確認用戶擁有註冊資訊後，將用戶資訊儲存至ApplicationCookie並轉頁至Home.Index頁面。(已登入)
+  5. 於localhost網站的Home.Index頁面，可以看到目前登入的用戶資訊：已登入，使用Google-OAuth。
+  6. 於localhost網站的Home.Index頁面點擊Logout按鈕，進行登出後完成測試。
   
 - Password登入後無須註冊，狀態：用戶資料已註冊
-  1. 於LocalHost網站的Account.Login頁面點擊LoginByPassword按鈕，執行Account.PasswordSignIn。
-  2. (背景作業)LocalHost網站執行Account.PasswordSignIn，確認用戶密碼(Hash)後，將用戶資訊儲存至ApplicationCookie並轉頁至Home.Index頁面。(已登入)
-  3. 於LocalHost網站的Home.Index頁面，可以看到目前登入的用戶資訊：已登入，使用Password。
-  4. 於LocalHost網站的Home.Index頁面點擊Logout按鈕，進行登出後完成測試。
+  1. 於localhost網站的Account.Login頁面點擊LoginByPassword按鈕，執行Account.PasswordSignIn。
+  2. (背景作業)localhost網站執行Account.PasswordSignIn，確認用戶密碼(Hash)後，將用戶資訊儲存至ApplicationCookie並轉頁至Home.Index頁面。(已登入)
+  3. 於localhost網站的Home.Index頁面，可以看到目前登入的用戶資訊：已登入，使用Password。
+  4. 於localhost網站的Home.Index頁面點擊Logout按鈕，進行登出後完成測試。
   
   
 ## [ASP.NET Core] Cookie/JwtBearer並存的身分驗證範例
@@ -71,7 +119,7 @@
   5. 點擊Logout按鈕，將會刪除Cookie，並轉頁至Login頁面。
   
   
-## [ASP.NET Core] Authenticate/Authorization 步驟流程範例
+## [ASP.NET Core] Authenticate/Authorization 流程範例
 
 本篇範例使用自定義的Middleware/Handler，展示在ASP.NET Core裡進行身分認證/身分授權的步驟流程。
 
